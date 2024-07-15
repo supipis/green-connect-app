@@ -4,8 +4,8 @@ function Home() {
 
     return (
         <>
-        <div>
-            <h2 className="text-red-900">My Listings</h2>
+        <div className="bg-custom-primary p-6">
+            <h2 className="text-custom-font-primary font-inika bg-custom-primary mb-6 ">My Listings</h2>
             <ListingCard />
         </div>
         </>
