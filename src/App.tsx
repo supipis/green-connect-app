@@ -4,6 +4,7 @@ import Home from './pages/home'
 import BottomNav from './componenets/bottomNav';
 import Market from './pages/market';
 import Tips from './pages/tips';
+import AddList from './pages/addList';
 
 
 
@@ -18,6 +19,7 @@ function App() {
           <Route path="/" element={<Home />} />
           <Route path="/tips" element={<Tips />} />
           <Route path="/market" element={<Market />} />
+          <Route path="/add" element={<AddList />} />
         </Routes>
         <BottomNav />
       </div>

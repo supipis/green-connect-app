@@ -1,7 +1,10 @@
 import BottomNav from "../componenets/bottomNav";
-import ListingCard from "../componenets/listingCard"
+import ListingCard from "../componenets/listingCard";
+import { useNavigate } from 'react-router-dom';
 
 const Home = () => {
+    const navigate = useNavigate();
+    
     const listings = [
         {
           image: 'src/assets/tomato.png',
@@ -48,7 +51,11 @@ const Home = () => {
         />
       ))}
       <div className="text-center">
-       <button className="bg-custom-btn-primary text-custom-btn-txt py-3 px-12 rounded-lg mt-2 font-bold text-xl">Add</button>
+       <button 
+       className="bg-custom-btn-primary text-custom-btn-txt py-3 px-12 rounded-lg mt-2 font-bold text-xl"
+       onClick={() => navigate('/add')}
+       >
+        Add</button>
 
       </div>
         </div>
