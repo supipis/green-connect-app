@@ -9,11 +9,10 @@ function App() {
  
 
   return (
-    <>
+    <div className='bg-custom-primary '>
     <Home />
-    <Tips/>
-      <Market />
-    </>
+  
+    </div>
   )
 }
 
