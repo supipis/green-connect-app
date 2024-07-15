@@ -1,6 +1,4 @@
-import React from 'react'
-import MarketCards from '../componenets/marketCard'
-
+import MarketCards from "../componenets/marketCard"
 
 const Market = ()  => {
     const marketLists = [

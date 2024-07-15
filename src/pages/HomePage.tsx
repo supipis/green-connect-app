@@ -1,6 +1,6 @@
-import BottomNav from "../componenets/bottomNav";
-import ListingCard from "../componenets/listingCard";
 import { useNavigate } from 'react-router-dom';
+import BottomNav from '../componenets/bottomNav';
+import ListingCard from '../componenets/listingCard';
 
 const Home = () => {
     const navigate = useNavigate();

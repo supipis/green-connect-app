@@ -1,7 +1,5 @@
 import TipCards from '../componenets/tipCards'
 
-
-
 const Tips = () => {
     const posts = [
         {

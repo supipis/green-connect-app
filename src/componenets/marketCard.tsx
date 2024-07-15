@@ -26,7 +26,7 @@ const MarketCards = ({ image, name, category, location, quantity }: Props) => {
                 </div>
             </div>
             <div className="ml-4">
-                <button className="bg-custom-btn-primary text-custom-btn-txt py-2 px-2 rounded-lg text-sm">Contact</button>
+                <button className="bg-custom-btn-primary text-custom-btn-txt py-2 px-2 rounded-lg text-sm font-inika">Contact</button>
             </div>
         </div>
     )

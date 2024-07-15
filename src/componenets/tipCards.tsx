@@ -1,5 +1,3 @@
-import React from 'react'
-
 type Props = {
     tip: string;
     postedBy: string;
