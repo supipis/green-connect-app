@@ -1,10 +1,7 @@
 import { Icon } from '@iconify/react/dist/iconify.js'
 import { NavLink } from 'react-router-dom'
 
-interface Props {}
-
-const BottomNav = (props: Props) => {
-    const {} = props
+const BottomNav = () => {
 
     return (
         <div className="fixed bottom-0 left-0 w-full bg-white shadow-lg">
