@@ -34,8 +34,8 @@ const Home = () => {
       ];
 
     return (
-        <div className="h-full w-full bg-custom-primary">
-        <div className="px-6 py-4 h-full">
+        <div className="h-full w-full">
+        <div className="px-6 py-4">
             <h1 className="text-custom-font-primary font-inika mb-6 text-lg ">My Listings</h1>
             {listings.map((listing, index) => (
         <ListingCard
