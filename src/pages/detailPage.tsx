@@ -1,3 +1,4 @@
+import { Icon } from "@iconify/react/dist/iconify.js";
 import { useParams } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
 
@@ -43,10 +44,17 @@ function DetailPage() {
 
   return (
     <div className="min-h-screen px-6 py-4">
-      <h1 className="text-custom-font-primary font-inika mb-6 text-lg">
-        My listings
-      </h1>
-      <div className="bg-white p-4 rounded-lg shadow-md text-center">
+       <div className="flex">
+        <button 
+          className="mr-6"
+          onClick={() => navigate(-1)}
+        ><Icon icon="weui:back-outlined" />
+        </button>
+        <h1 className="text-custom-font-primary font-inika text-lg ">
+          My listings
+        </h1>
+        </div>
+      <div className="bg-white mt-6 p-4 rounded-lg shadow-md text-center">
         <h2 className="text-xl font-bold">{item?.name}</h2>
         <div className="flex justify-center items-center">
           <img
