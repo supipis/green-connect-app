@@ -5,6 +5,7 @@ import BottomNav from './componenets/bottomNav';
 import Market from './pages/market';
 import Tips from './pages/tips';
 import AddList from './pages/addList';
+import DetailPage from './pages/detailPage';
 
 
 
@@ -20,6 +21,7 @@ function App() {
           <Route path="/tips" element={<Tips />} />
           <Route path="/market" element={<Market />} />
           <Route path="/add" element={<AddList />} />
+          <Route path="/details/:id" element={<DetailPage} />
         </Routes>
         <BottomNav />
       </div>
