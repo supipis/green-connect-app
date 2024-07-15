@@ -1,24 +1,23 @@
-import React from 'react'
 import TipCards from '../componenets/tipCards'
 
-interface Props {}
 
-function Tips(props: Props) {
+
+const Tips = () => {
     const posts = [
         {
           tip: '50% off on all the seeds at Plantagen Brommaplan',
           postedBy: 'Anna',
-          postedOn: '15/07/2024',
+          postedOn: '2023/05/09',
         },
         {
             tip: 'Egg shells are good fertilizer for baby tomato plants.',
             postedBy: 'Supipi',
-            postedOn: '10/06/2024',
+            postedOn: '2023/05/02',
           },
           {
             tip: '2 for 1 offer for soil at Blomstalandet and Ica maxi Solna',
             postedBy: 'Ricky',
-            postedOn: '05/07/2023',
+            postedOn: '2023/05/01',
           }
     ]
 
