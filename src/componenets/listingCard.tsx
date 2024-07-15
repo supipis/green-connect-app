@@ -1,6 +1,8 @@
 import React from 'react'
+import { useNavigate } from 'react-router-dom';
 
 type Props = {
+    id: number;
     image: string;
     name: string;
     category: string;
@@ -8,10 +10,18 @@ type Props = {
     quantity: number;
 }
 
-const ListingCard = ({ image, name, category, location, quantity }: Props) => {
+const ListingCard = ({ id, image, name, category, location, quantity }: Props) => {
+    const navigate = useNavigate();
+
+    const handleCardClick = () => {
+        navigate(`/details/${id}`);
+    };
+    
     return (
         <>
-        <div className='bg-white shadow-md rounded-lg flex items-center p-4 mb-4'>
+        <div className='bg-white shadow-md rounded-lg flex items-center p-4 mb-4'
+        onClick={handleCardClick}
+        >
             <img src={image} alt="" className='w-16 h-16 rounded mr-6' />
             <div className='flex-1'>
             <h1 className='text-lg text-custom-font-primary font-inika font-bold'>{name}</h1>

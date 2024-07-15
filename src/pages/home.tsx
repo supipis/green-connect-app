@@ -7,6 +7,7 @@ const Home = () => {
 
     const listings = [
         {
+            id: 1,
           image: 'src/assets/tomato.png',
           name: 'Tomato',
           category: 'Plant',
@@ -14,6 +15,7 @@ const Home = () => {
           quantity: 2,
         },
         {
+            id: 2,
           image: 'src/assets/basil.png',
           name: 'Basil',
           category: 'Plant',
@@ -21,6 +23,7 @@ const Home = () => {
           quantity: 1,
         },
         {
+            id: 3,
           image: 'src/assets/rose.png',
           name: 'Rose',
           category: 'Plant',
@@ -28,6 +31,7 @@ const Home = () => {
           quantity: 1,
         },
         {
+            id: 4,
             image: 'src/assets/basil.png',
             name: 'Basil',
             category: 'Plant',
@@ -40,9 +44,10 @@ const Home = () => {
         <div className="h-full w-full">
         <div className="px-6 py-4">
             <h1 className="text-custom-font-primary font-inika mb-6 text-lg ">My Listings</h1>
-            {listings.map((listing, index) => (
+            {listings.map((listing) => (
         <ListingCard
-          key={index}
+        key={listing.id}
+        id={listing.id}
           image={listing.image}
           name={listing.name}
           category={listing.category}
