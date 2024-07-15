@@ -1,7 +1,7 @@
 const addForm = () => {
     return (
        
-            <div className="flex items-center justify-center ">
+            <div className="">
               <div className="">
                 <form className="space-y-3">
                   <div>
