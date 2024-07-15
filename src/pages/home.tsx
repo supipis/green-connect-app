@@ -1,3 +1,4 @@
+import BottomNav from "../componenets/bottomNav";
 import ListingCard from "../componenets/listingCard"
 
 const Home = () => {
@@ -33,8 +34,8 @@ const Home = () => {
       ];
 
     return (
-        <div className="h-full w-full">
-        <div className="p-6 h-full">
+        <div className="h-full w-full bg-custom-primary">
+        <div className="px-6 py-4 h-full">
             <h1 className="text-custom-font-primary font-inika mb-6 text-lg ">My Listings</h1>
             {listings.map((listing, index) => (
         <ListingCard
@@ -47,10 +48,11 @@ const Home = () => {
         />
       ))}
       <div className="text-center">
-       <button className="bg-custom-btn-primary text-custom-btn-txt py-3 px-12 rounded-lg mt-4 font-bold text-xl">Add</button>
+       <button className="bg-custom-btn-primary text-custom-btn-txt py-3 px-12 rounded-lg mt-2 font-bold text-xl">Add</button>
 
       </div>
         </div>
+        <BottomNav />
         </div>
         
     )
