@@ -36,7 +36,7 @@ const Tips = () => {
       ))}
             </div>
             <div className="text-center">
-       <button className="bg-custom-btn-primary text-custom-btn-txt py-3 px-12 rounded-lg mt-2 font-bold text-xl">Post</button>
+       <button className="bg-custom-btn-primary font-inika text-custom-btn-txt py-3 px-12 rounded-lg mt-2 font-bold text-xl">Post</button>
 
       </div>
             </div>
