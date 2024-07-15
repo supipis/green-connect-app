@@ -2,7 +2,7 @@ const EditList = () => {
    
     return (
        
-            <div className="">
+            <div className="mt-6">
               <div className="">
                 <form className="space-y-3">
                   <div>
