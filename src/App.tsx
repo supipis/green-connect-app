@@ -7,6 +7,7 @@ import Tips from './pages/TipsPage';
 import AddList from './pages/AddListPage';
 import DetailPage from './pages/DetailPage';
 import EditListPage from './pages/EditListPage';
+import PostTipPage from './pages/PostTipPage';
 
 
 
@@ -24,6 +25,7 @@ function App() {
           <Route path="/add" element={<AddList />} />
           <Route path="/details/:id" element={<DetailPage />} />
           <Route path="/edit" element={<EditListPage />} />
+          <Route path="/post" element={<PostTipPage />} />
         </Routes>
         <BottomNav />
       </div>

@@ -1,6 +1,8 @@
+import { useNavigate } from 'react-router-dom';
 import TipCards from '../componenets/tipCards'
 
 const Tips = () => {
+  const navigate = useNavigate();
     const posts = [
         {
           tip: '50% off on all the seeds at Plantagen Brommaplan',
@@ -34,7 +36,9 @@ const Tips = () => {
       ))}
             </div>
             <div className="text-center">
-       <button className="bg-custom-btn-primary font-inika text-custom-btn-txt py-3 px-12 rounded-lg mt-2 font-bold text-xl">Post</button>
+       <button className="bg-custom-btn-primary font-inika text-custom-btn-txt py-3 px-12 rounded-lg mt-2 font-bold text-xl"
+       onClick={() => navigate("/post")}
+       >Post</button>
 
       </div>
             </div>
