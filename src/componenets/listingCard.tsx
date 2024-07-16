@@ -25,7 +25,7 @@ const ListingCard = ({ id, image, name, category, location, quantity }: Props) =
             <img src={image} alt="name" className='w-16 h-16 rounded ' />
             </div>
             
-            <div className=''>
+            <div>
             <h1 className='text-lg text-custom-font-primary font-inika font-bold mb-2'>{name}</h1>
             <div className="text-sm mb-2">
                 <p className='text-custom-font-primary font-inika'>Category: <span className='font-semibold'>{category}</span></p>
