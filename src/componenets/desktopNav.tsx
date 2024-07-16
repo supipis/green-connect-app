@@ -12,10 +12,13 @@ const DesktopNav = () => {
         
         {/* Navigation Links */}
         <div className="flex space-x-8">
-          <NavLink
+        <NavLink
             to="/"
-            className="flex items-center text-custom-font-primary  hover:text-custom-btn-primary"
-            activeClassName="text-custom-btn-primary"
+            className={({ isActive }) =>
+              isActive
+                ? "flex items-center text-custom-btn-primary"
+                : "flex items-center text-custom-font-primary hover:text-custom-btn-primary"
+            }
           >
             
             Home
@@ -23,8 +26,11 @@ const DesktopNav = () => {
           
           <NavLink
             to="/tips"
-            className="flex items-center text-custom-font-primary  hover:text-custom-btn-primary"
-            activeClassName="text-custom-btn-primary"
+            className={({ isActive }) =>
+              isActive
+                ? "flex items-center text-custom-btn-primary"
+                : "flex items-center text-custom-font-primary hover:text-custom-btn-primary"
+            }
           >
             
             Tips
@@ -32,8 +38,11 @@ const DesktopNav = () => {
           
           <NavLink
             to="/market"
-            className="flex items-center text-custom-font-primary  hover:text-custom-btn-primary"
-            activeClassName="text-custom-btn-primary"
+            className={({ isActive }) =>
+              isActive
+                ? "flex items-center text-custom-btn-primary"
+                : "flex items-center text-custom-font-primary hover:text-custom-btn-primary"
+            }
           >
             Market
           </NavLink>
