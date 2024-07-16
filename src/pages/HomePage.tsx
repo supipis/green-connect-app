@@ -1,6 +1,7 @@
 import { useNavigate } from "react-router-dom";
 import ListingCard from "../componenets/listingCard";
 
+
 const Home = () => {
   const navigate = useNavigate();
 
@@ -41,7 +42,7 @@ const Home = () => {
       id: 5,
       image: "src/assets/seed.png",
       name: "Cucumber",
-      category: "seed",
+      category: "Seed",
       location: "Göteborg",
       quantity: 1,
     },
@@ -49,26 +50,44 @@ const Home = () => {
 
   return (
     <div className="h-full w-full">
-      <div className="px-6 py-4">
-        <h1 className="text-custom-font-primary font-inika mb-6 text-lg ">
+      <div className="lg:px-12 lg:py-8 px-6 py-4">
+        <h1 className="text-custom-font-primary font-inika mb-6 text-lg">
           My Listings
         </h1>
-        <div className="">
-        {listings.map((listing) => (
-          <ListingCard
-            key={listing.id}
-            id={listing.id}
-            image={listing.image}
-            name={listing.name}
-            category={listing.category}
-            location={listing.location}
-            quantity={listing.quantity}
-          />
-        ))}
+
+        {/* Mobile View */}
+        <div className="sm:hidden">
+          {listings.map((listing) => (
+            <ListingCard
+              key={listing.id}
+              id={listing.id}
+              image={listing.image}
+              name={listing.name}
+              category={listing.category}
+              location={listing.location}
+              quantity={listing.quantity}
+            />
+          ))}
         </div>
-        <div className="text-center ">
+
+        {/* Tablet and Desktop View */}
+        <div className="hidden sm:grid sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 lg:text-center">
+          {listings.map((listing) => (
+            <ListingCard
+              key={listing.id}
+              id={listing.id}
+              image={listing.image}
+              name={listing.name}
+              category={listing.category}
+              location={listing.location}
+              quantity={listing.quantity}
+            />
+          ))}
+        </div>
+
+        <div className="text-center mt-6">
           <button
-            className="bg-custom-btn-primary font-inika text-custom-btn-txt py-3 px-12 rounded-lg mt-2 font-bold text-xl mb-20"
+            className="bg-custom-btn-primary mb-20 font-inika text-custom-btn-txt py-3 px-12 rounded-lg font-bold text-xl"
             onClick={() => navigate("/add")}
           >
             Add
