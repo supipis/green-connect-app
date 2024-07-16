@@ -9,16 +9,18 @@ import DetailPage from './pages/DetailPage';
 import EditListPage from './pages/EditListPage';
 import PostTipPage from './pages/PostTipPage';
 import LoginPage from './pages/LoginPage';
+import DesktopNav from './componenets/desktopNav';
 
 
 
 
-function App() {
- 
-
+const App = () => {
   return (
     <Router>
       <div className="App">
+      <div className="hidden md:block">
+          <DesktopNav />
+        </div>
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/tips" element={<Tips />} />
@@ -29,7 +31,9 @@ function App() {
           <Route path="/post" element={<PostTipPage />} />
           <Route path="/login" element={<LoginPage />} />
         </Routes>
-        <BottomNav />
+        <div className="block md:hidden">
+          <BottomNav />
+        </div>
       </div>
     </Router>
   )
