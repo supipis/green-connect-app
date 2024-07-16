@@ -8,6 +8,7 @@ import AddList from './pages/AddListPage';
 import DetailPage from './pages/DetailPage';
 import EditListPage from './pages/EditListPage';
 import PostTipPage from './pages/PostTipPage';
+import LoginPage from './pages/LoginPage';
 
 
 
@@ -26,6 +27,7 @@ function App() {
           <Route path="/details/:id" element={<DetailPage />} />
           <Route path="/edit" element={<EditListPage />} />
           <Route path="/post" element={<PostTipPage />} />
+          <Route path="/login" element={<LoginPage />} />
         </Routes>
         <BottomNav />
       </div>
