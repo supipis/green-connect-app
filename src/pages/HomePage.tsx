@@ -37,6 +37,14 @@ const Home = () => {
       location: "Stadshagen",
       quantity: 1,
     },
+    {
+      id: 5,
+      image: "src/assets/seed.png",
+      name: "Cucumber",
+      category: "seed",
+      location: "Göteborg",
+      quantity: 1,
+    },
   ];
 
   return (
@@ -45,6 +53,7 @@ const Home = () => {
         <h1 className="text-custom-font-primary font-inika mb-6 text-lg ">
           My Listings
         </h1>
+        <div className="">
         {listings.map((listing) => (
           <ListingCard
             key={listing.id}
@@ -56,9 +65,10 @@ const Home = () => {
             quantity={listing.quantity}
           />
         ))}
-        <div className="text-center">
+        </div>
+        <div className="text-center ">
           <button
-            className="bg-custom-btn-primary font-inika text-custom-btn-txt py-3 px-12 rounded-lg mt-2 font-bold text-xl"
+            className="bg-custom-btn-primary font-inika text-custom-btn-txt py-3 px-12 rounded-lg mt-2 font-bold text-xl mb-20"
             onClick={() => navigate("/add")}
           >
             Add
