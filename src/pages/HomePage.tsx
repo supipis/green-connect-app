@@ -1,52 +1,65 @@
 import { useNavigate } from "react-router-dom";
 import ListingCard from "../componenets/listingCard";
+import axios from "axios";
+import { useEffect, useState } from "react";
 
 
 const Home = () => {
   const navigate = useNavigate();
+  const [listings, setListings] = useState([]);
 
-  const listings = [
-    {
-      id: 1,
-      image: "src/assets/tomato.png",
-      name: "Tomato",
-      category: "Plant",
-      location: "Solna",
-      quantity: 2,
-    },
-    {
-      id: 2,
-      image: "src/assets/basil.png",
-      name: "Basil",
-      category: "Plant",
-      location: "Stadshagen",
-      quantity: 1,
-    },
-    {
-      id: 3,
-      image: "src/assets/rose.png",
-      name: "Rose",
-      category: "Plant",
-      location: "Stadshagen",
-      quantity: 1,
-    },
-    {
-      id: 4,
-      image: "src/assets/basil.png",
-      name: "Basil",
-      category: "Plant",
-      location: "Stadshagen",
-      quantity: 1,
-    },
-    {
-      id: 5,
-      image: "src/assets/seed.png",
-      name: "Cucumber",
-      category: "Seed",
-      location: "Göteborg",
-      quantity: 1,
-    },
-  ];
+  useEffect(() => {
+    axios.get("http://localhost:8080/api/listings")
+    .then(response => {
+      setListings(response.data)
+    })
+    .catch(error => {
+      console.error("Error fetching data")
+    });
+  },[])
+
+  // const listings = [
+  //   {
+  //     id: 1,
+  //     image: "src/assets/tomato.png",
+  //     name: "Tomato",
+  //     category: "Plant",
+  //     location: "Solna",
+  //     quantity: 2,
+  //   },
+  //   {
+  //     id: 2,
+  //     image: "src/assets/basil.png",
+  //     name: "Basil",
+  //     category: "Plant",
+  //     location: "Stadshagen",
+  //     quantity: 1,
+  //   },
+  //   {
+  //     id: 3,
+  //     image: "src/assets/rose.png",
+  //     name: "Rose",
+  //     category: "Plant",
+  //     location: "Stadshagen",
+  //     quantity: 1,
+  //   },
+  //   {
+  //     id: 4,
+  //     image: "src/assets/basil.png",
+  //     name: "Basil",
+  //     category: "Plant",
+  //     location: "Stadshagen",
+  //     quantity: 1,
+  //   },
+  //   {
+  //     id: 5,
+  //     image: "src/assets/seed.png",
+  //     name: "Cucumber",
+  //     category: "Seed",
+  //     location: "Göteborg",
+  //     quantity: 1,
+  //   },
+  // ];
 
   return (
     <div className="h-full w-full lg:mt-20 md:mt-20">
