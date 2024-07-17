@@ -18,48 +18,6 @@ const Home = () => {
     });
   },[])
 
-  // const listings = [
-  //   {
-  //     id: 1,
-  //     image: "src/assets/tomato.png",
-  //     name: "Tomato",
-  //     category: "Plant",
-  //     location: "Solna",
-  //     quantity: 2,
-  //   },
-  //   {
-  //     id: 2,
-  //     image: "src/assets/basil.png",
-  //     name: "Basil",
-  //     category: "Plant",
-  //     location: "Stadshagen",
-  //     quantity: 1,
-  //   },
-  //   {
-  //     id: 3,
-  //     image: "src/assets/rose.png",
-  //     name: "Rose",
-  //     category: "Plant",
-  //     location: "Stadshagen",
-  //     quantity: 1,
-  //   },
-  //   {
-  //     id: 4,
-  //     image: "src/assets/basil.png",
-  //     name: "Basil",
-  //     category: "Plant",
-  //     location: "Stadshagen",
-  //     quantity: 1,
-  //   },
-  //   {
-  //     id: 5,
-  //     image: "src/assets/seed.png",
-  //     name: "Cucumber",
-  //     category: "Seed",
-  //     location: "Göteborg",
-  //     quantity: 1,
-  //   },
-  // ];
 
   return (
     <div className="h-full w-full lg:mt-20 md:mt-20">
