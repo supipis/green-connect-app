@@ -1,25 +1,86 @@
-const addForm = () => {
-    return (
-       
-            <div className="mt-6">
-              <div className="">
-                <form className="space-y-3">
-                  <div>
-                    <label htmlFor="name" className="block text-custom-font-primary font-inika text-lg">Name</label>
-                    <input
-                      type="text"
-                      id="name"
-                      name="name"
-                      className="mt-1 text-custom-font-primary font-inika p-2 block w-full border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-custom-btn-primary focus:border-custom-btn-primary"
-                    />
-                  </div>
-                  <div>
-                    <label htmlFor="category" className="block text-custom-font-primary font-inika text-lg">Category</label>
-                    <select
-                      id="category"
-                      name="category"
-                      className="mt-1 text-custom-font-primary font-inika p-2 block w-full border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-custom-btn-primary focus
-                      focus:border-green-500"
+import { useState } from "react";
+
+const AddForm = () => {
+  const [formData, setFormData] = useState({
+    image: "",
+    name: "",
+    category: "Plant", // Set a default value
+    location: "",
+    quantity: 0,
+  });
+
+  const [file, setFile] = useState(null);
+
+  const handleChange = (e) => {
+    const { name, value } = e.target;
+    setFormData({ ...formData, [name]: value });
+  };
+
+  const handleFileChange = (e) => {
+    setFile(e.target.files[0]);
+  };
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    const data = new FormData();
+    data.append("image", file);
+    data.append("name", formData.name);
+    data.append("category", formData.category);
+    data.append("location", formData.location);
+    data.append("quantity", formData.quantity);
+
+    try {
+      const response = await fetch("http://localhost:8080/api/listings", {
+        method: "POST",
+        body: data,
+      });
+
+      if (response.ok) {
+        alert("Listing added successfully");
+        setFormData({
+          image: "",
+          name: "",
+          category: "Plant", // Reset to default value
+          location: "",
+          quantity: 0,
+        });
+        setFile(null);
+      } else {
+        alert("Failed to add listing");
+      }
+    } catch (error) {
+      console.error("Error:", error);
+      alert("Failed to add listing");
+    }
+  };
+
+  return (
+    <div className="mt-6">
+      <div className="">
+        <form className="space-y-3" onSubmit={handleSubmit}>
+          <div>
+            <label htmlFor="name" className="block text-custom-font-primary font-inika text-lg">
+              Name
+            </label>
+            <input
+              type="text"
+              id="name"
+              name="name"
+              value={formData.name}
+              onChange={handleChange}
+              className="mt-1 text-custom-font-primary font-inika p-2 block w-full border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-custom-btn-primary focus:border-custom-btn-primary"
+            />
+          </div>
+          <div>
+            <label htmlFor="category" className="block text-custom-font-primary font-inika text-lg">
+              Category
+            </label>
+            <select
+              id="category"
+              name="category"
+              value={formData.category}
+              onChange={handleChange}
+              className="mt-1 text-custom-font-primary font-inika p-2 block w-full border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-custom-btn-primary focus:border-custom-btn-primary"
             >
               <option>Plant</option>
               <option>Seeds</option>
@@ -27,42 +88,52 @@ const addForm = () => {
             </select>
           </div>
           <div>
-            <label htmlFor="location" className="block text-custom-font-primary font-inika text-lg">Location</label>
+            <label htmlFor="location" className="block text-custom-font-primary font-inika text-lg">
+              Location
+            </label>
             <input
               type="text"
               id="location"
               name="location"
+              value={formData.location}
+              onChange={handleChange}
               className="mt-1 p-2 block text-custom-font-primary font-inika w-full border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-custom-btn-primary focus:border-custom-btn-primary"
             />
           </div>
           <div>
-            <label htmlFor="quantity" className="block text-custom-font-primary font-inika text-lg">Quantity</label>
-            <select
+            <label htmlFor="quantity" className="block text-custom-font-primary font-inika text-lg">
+              Quantity
+            </label>
+            <input
+              type="number"
               id="quantity"
               name="quantity"
-              className="mt-1 p-2 block w-full  text-custom-font-primary font-inika border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-custom-btn-primary focus:border-custom-btn-primary"
-            >
-              <option>1</option>
-              <option>2</option>
-              <option>3</option>
-            </select>
+              value={formData.quantity}
+              onChange={handleChange}
+              className="mt-1 p-2 block w-full text-custom-font-primary font-inika border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-custom-btn-primary focus:border-custom-btn-primary"
+            />
           </div>
           <div>
-            <label htmlFor="picture" className="block ttext-custom-font-primary font-inika text-lg">Picture</label>
+            <label htmlFor="picture" className="block text-custom-font-primary font-inika text-lg">
+              Picture
+            </label>
             <input
               type="file"
               id="picture"
               name="picture"
-              className="mt-1 p-2 block w-full  text-custom-font-primary font-inika border border-gray-300 rounded-md shadow-sm bg-white focus:outline-none focus:ring-2 focus:ring-custom-btn-primary focus:border-custom-btn-primary"
+              onChange={handleFileChange}
+              className="mt-1 p-2 block w-full text-custom-font-primary font-inika border border-gray-300 rounded-md shadow-sm bg-white focus:outline-none focus:ring-2 focus:ring-custom-btn-primary focus:border-custom-btn-primary"
             />
           </div>
-          <div>
-            
+          <div className="text-center">
+            <button className="bg-custom-btn-primary text-custom-btn-txt py-3 px-12 rounded-lg mt-4 font-bold text-xl font-inika">
+              Add
+            </button>
           </div>
         </form>
       </div>
     </div>
-    )
-}
+  );
+};
 
-export default addForm
+export default AddForm;
