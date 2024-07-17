@@ -38,15 +38,12 @@ const EditList = () => {
           </div>
           <div>
             <label htmlFor="quantity" className="block text-custom-font-primary font-inika text-lg">Quantity</label>
-            <select
+            <input
               id="quantity"
               name="quantity"
               className="mt-1 p-2 block w-full  text-custom-font-primary font-inika border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-custom-btn-primary focus:border-custom-btn-primary"
             >
-              <option>1</option>
-              <option>2</option>
-              <option>3</option>
-            </select>
+            </input>
           </div>
           <div>
             <label htmlFor="picture" className="block ttext-custom-font-primary font-inika text-lg">Picture</label>
