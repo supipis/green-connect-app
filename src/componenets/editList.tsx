@@ -10,6 +10,7 @@ const EditList = () => {
     location: '',
     quantity: 0,
     image: '',
+    imageUrl: ''
   });
 
   useEffect(() => {
@@ -22,6 +23,7 @@ const EditList = () => {
           location: data.location,
           quantity: data.quantity,
           image: data.image,
+          imageUrl: `http://localhost:8080/${data.image}`,
         });
       })
       .catch((error) => console.error("Error fetching item:", error));
@@ -67,7 +69,13 @@ const EditList = () => {
       console.error('Error occurred while updating listing:', error);
     }
   };
+  const getCurrentImageUrl = () => {
+    if (!formData?.image) return ''; // Handle case where image URL is empty
 
+    const fileName = formData.image.split('/').pop();
+    const imageUrl = `http://localhost:8080/${fileName}`;
+    return imageUrl;
+  };
   // const getCurrentImageUrl = () => {
   //   if (!formData.image) return '';
   //   return URL.createObjectURL(formData.image);
@@ -145,6 +153,19 @@ const EditList = () => {
               </div>
             )}
           </div> */}
+          <div className="mt-4">
+  {formData.imageUrl && (
+    <div>
+      <label className="block text-custom-font-primary font-inika text-lg">Current Picture:</label>
+      <img
+        src={getCurrentImageUrl()}
+        alt="Current"
+        className="mt-2 w-40 h-auto object-cover rounded-md"
+      />
+    </div>
+  )}
+</div>
+
           <div className="text-center">
             <button type="submit" className="bg-custom-btn-primary text-custom-btn-txt py-3 px-12 rounded-lg mt-2 font-bold text-xl mb-20">
               Edit
