@@ -2,7 +2,6 @@ import { useState } from "react";
 
 const AddForm = () => {
   const [formData, setFormData] = useState({
-    image: "",
     name: "",
     category: "Plant", // Set a default value
     location: "",
@@ -22,37 +21,43 @@ const AddForm = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    const data = new FormData();
-    data.append("image", file);
-    data.append("name", formData.name);
-    data.append("category", formData.category);
-    data.append("location", formData.location);
-    data.append("quantity", formData.quantity);
+
+    if (!file) {
+        alert("Please select a file");
+        return;
+    }
+
+    const formDataToSend = new FormData();
+    formDataToSend.append("image", file);
+    formDataToSend.append("name", formData.name);
+    formDataToSend.append("category", formData.category);
+    formDataToSend.append("location", formData.location);
+    formDataToSend.append("quantity", formData.quantity.toString());
 
     try {
-      const response = await fetch("http://localhost:8080/api/listings", {
-        method: "POST",
-        body: data,
-      });
-
-      if (response.ok) {
-        alert("Listing added successfully");
-        setFormData({
-          image: "",
-          name: "",
-          category: "Plant", // Reset to default value
-          location: "",
-          quantity: 0,
+        const response = await fetch("http://localhost:8080/api/listings", {
+            method: "POST",
+            body: formDataToSend,
         });
-        setFile(null);
-      } else {
-        alert("Failed to add listing");
-      }
+
+        if (response.ok) {
+            alert("Listing added successfully");
+            setFormData({
+                name: "",
+                category: "Plant", // Reset to default value
+                location: "",
+                quantity: 0,
+            });
+            setFile(null);
+        } else {
+            alert("Failed to add listing");
+        }
     } catch (error) {
-      console.error("Error:", error);
-      alert("Failed to add listing");
+        console.error("Error:", error);
+        alert("Failed to add listing");
     }
-  };
+};
+
 
   return (
     <div className="mt-6">
