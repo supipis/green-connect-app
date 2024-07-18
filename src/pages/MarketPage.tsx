@@ -1,37 +1,6 @@
 import MarketCards from "../componenets/marketCard";
 
 const Market = () => {
-  const marketLists = [
-    {
-      image: "src/assets/tomato.png",
-      name: "Tomato",
-      category: "Plant",
-      location: "Solna",
-      quantity: 2,
-    },
-    {
-      image: "src/assets/basil.png",
-      name: "Basil",
-      category: "Plant",
-      location: "Kungsholmen",
-      quantity: 2,
-    },
-    {
-      image: "src/assets/tomato.png",
-      name: "Tomato",
-      category: "Plant",
-      location: "Nynashamn",
-      quantity: 5,
-    },
-    {
-      image: "src/assets/seed.png",
-      name: "Cucumber",
-      category: "Seed",
-      location: "Stockholm",
-      quantity: 5,
-    },
-  ];
-
   return (
     <div className="h-full w-full lg:mt-20 md:mt-20">
       <div className="px-6 py-4 lg:px-12 lg:py-8">
