@@ -32,6 +32,9 @@ const EditList = () => {
     queryKey: ["listing", id],
     queryFn: () => fetchListing(id),
     onSuccess: (data) => {
+      console.log('Fetched data:', data);
+
+      // When the data is successfully fetched, populate the form fields
       setFormData({
         name: data.name,
         category: data.category,
@@ -95,6 +98,7 @@ const EditList = () => {
     <div className="mt-6">
       <div className="">
         <form className="space-y-3" onSubmit={handleSubmit}>
+         
         <div>
             <label
               htmlFor="name"

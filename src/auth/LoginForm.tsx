@@ -21,7 +21,7 @@ function LoginForm() {
     try {
       await login(username, password);
       localStorage.setItem('auth', JSON.stringify(btoa(`${username}:${password}`)));
-      navigate('/'); // Redirect to dashboard after successful login
+      navigate('/'); 
     } catch (err) {
       setError('Invalid username or password');
     }
