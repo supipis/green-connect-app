@@ -11,7 +11,7 @@ type Props = {
 
 const ListingCard = ({ id, image, name, category, location, quantity }: Props) => {
     const fileName = image.split('/').pop();
-    const imageUrl = `http://localhost:8080/${fileName}`;
+    const imageUrl = `http://localhost:8080/api/listings/images/${fileName}`;
     const navigate = useNavigate();
 
     const handleCardClick = () => {
