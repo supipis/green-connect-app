@@ -1,14 +1,42 @@
 import { useState } from "react";
+import { useMutation, useQueryClient } from "@tanstack/react-query";
+import { useAuth } from "../auth/AuthProvider";
+import api from "../auth/api";
 
 const AddForm = () => {
   const [formData, setFormData] = useState({
     name: "",
-    category: "Plant", // Set a default value
+    category: "Plant",
     location: "",
     quantity: 0,
   });
 
   const [file, setFile] = useState(null);
+  const { auth } = useAuth();
+  const queryClient = useQueryClient();
+
+  const addListingMutation = useMutation({
+    mutationFn: async (formDataToSend) => {
+      const response = await api.post("/api/listings", formDataToSend, {
+        headers: {
+          "Content-Type": "multipart/form-data",
+          Authorization: `Basic ${auth}`,
+        },
+      });
+      return response.data;
+    },
+    onSuccess: () => {
+      queryClient.invalidateQueries({
+        queryKey: ["listings"]
+      });
+      alert("Listing added successfully");
+      resetForm();
+    },
+    onError: (error) => {
+      console.error("Error:", error);
+      alert("Failed to add listing");
+    },
+  });
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -19,12 +47,12 @@ const AddForm = () => {
     setFile(e.target.files[0]);
   };
 
-  const handleSubmit = async (e) => {
+  const handleSubmit = (e) => {
     e.preventDefault();
 
     if (!file) {
-        alert("Please select a file");
-        return;
+      alert("Please select a file");
+      return;
     }
 
     const formDataToSend = new FormData();
@@ -34,36 +62,24 @@ const AddForm = () => {
     formDataToSend.append("location", formData.location);
     formDataToSend.append("quantity", formData.quantity.toString());
 
-    try {
-        const response = await fetch("http://localhost:8080/api/listings", {
-            method: "POST",
-            body: formDataToSend,
-        });
+    addListingMutation.mutate(formDataToSend);
+  };
 
-        if (response.ok) {
-            alert("Listing added successfully");
-            setFormData({
-                name: "",
-                category: "Plant", // Reset to default value
-                location: "",
-                quantity: 0,
-            });
-            setFile(null);
-        } else {
-            alert("Failed to add listing");
-        }
-    } catch (error) {
-        console.error("Error:", error);
-        alert("Failed to add listing");
-    }
-};
-
+  const resetForm = () => {
+    setFormData({
+      name: "",
+      category: "Plant",
+      location: "",
+      quantity: 0,
+    });
+    setFile(null);
+  };
 
   return (
     <div className="mt-6">
       <div className="">
         <form className="space-y-3" onSubmit={handleSubmit}>
-          <div>
+        <div>
             <label htmlFor="name" className="block text-custom-font-primary font-inika text-lg">
               Name
             </label>
@@ -131,8 +147,11 @@ const AddForm = () => {
             />
           </div>
           <div className="text-center">
-            <button className="bg-custom-btn-primary text-custom-btn-txt py-3 px-12 rounded-lg mt-4 font-bold text-xl font-inika">
-              Add
+            <button 
+              className="bg-custom-btn-primary text-custom-btn-txt py-3 px-12 rounded-lg mt-4 font-bold text-xl font-inika"
+              disabled={addListingMutation.isLoading}
+            >
+              {addListingMutation.isLoading ? "Adding..." : "Add"}
             </button>
           </div>
         </form>
