@@ -12,7 +12,7 @@ const fetchPosts = async () => {
 const Tips = () => {
   const navigate = useNavigate();
   
-  const { data: posts, isLoading, isError, error, refetch } = useQuery({
+  const { data, isLoading, isError, error, refetch } = useQuery({
     queryKey: ["posts"],
     queryFn: fetchPosts,
   });
@@ -45,11 +45,11 @@ const Tips = () => {
         <h1 className="text-custom-font-primary font-inika mb-6 text-lg ">
           Let's grow together
         </h1>
-        {posts.map((post, index) => (
+        {data.map((post, index) => (
           <TipCards
             key={index}
             tip={post.message}
-            postedBy={post.author.username}
+            postedBy={post.author ? (post.author.username ? post.author.username : "x") : "y"}
             postedOn={new Date(post.postedOn).toLocaleDateString()}
           />
         ))}
