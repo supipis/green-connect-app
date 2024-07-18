@@ -62,12 +62,12 @@ const DesktopNav = () => {
         </div>
         <div>
         <NavLink
-            to="/login"
+            to="/logout"
             className="flex items-center text-custom-font-primary  hover:text-custom-btn-primary"
             
           >
-            <Icon icon="mdi:login" className="w-6 h-6 mr-1" />
-            Login
+            <Icon icon="mdi:logout" className="w-6 h-6 mr-1" />
+            Logout
           </NavLink>
         </div>
      
