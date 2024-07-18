@@ -5,8 +5,8 @@ import { Icon } from "@iconify/react/dist/iconify.js";
 const AddListPage = () => {
     const navigate = useNavigate();
   return (
-    <div className="h-full w-full">
-      <div className="px-6 py-4">
+    <div className="h-full w-full lg:mt-20 md:mt-20">
+      <div className="lg:px-12 lg:py-8 px-6 py-4">
         <div className="flex">
         <button 
           className="mr-6"
