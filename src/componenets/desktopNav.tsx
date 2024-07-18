@@ -6,7 +6,7 @@ const DesktopNav = () => {
     <div className="bg-white shadow-lg fixed top-0 left-0 w-full z-10">
       <div className="container mx-auto px-6 py-4 flex justify-between items-center">
         {/* Logo */}
-        <div className="text-custom-font-primary font-bold text-2xl">
+        <div className="">
           <img src={logoImageUrl} alt="" className="h-10"/>
         </div>
         
