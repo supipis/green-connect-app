@@ -101,7 +101,7 @@ const EditList = () => {
         <div>
             <label
               htmlFor="name"
-              className="block text-custom-font-primary font-inika text-lg"
+              className="block text-custom-font-primary text-lg"
             >
               Name
             </label>
@@ -111,7 +111,7 @@ const EditList = () => {
               name="name"
               value={formData.name}
               onChange={handleChange}
-              className="mt-1 text-custom-font-primary font-inika p-2 block w-full border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-custom-btn-primary focus:border-custom-btn-primary"
+              className="mt-1 text-custom-font-primary p-2 block w-full border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-custom-btn-primary focus:border-custom-btn-primary"
             />
           </div>
           <div>
