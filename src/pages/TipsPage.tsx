@@ -1,25 +1,43 @@
 import { useNavigate } from "react-router-dom";
 import TipCards from "../componenets/tipCards";
+import api from "../auth/api";
+import { useQuery } from "@tanstack/react-query";
+import { useEffect } from "react";
+
+const fetchPosts = async () => {
+  const response = await api.get("/api/posts");
+  return response.data;
+};
 
 const Tips = () => {
   const navigate = useNavigate();
-  const posts = [
-    {
-      tip: "50% off on all the seeds at Plantagen Brommaplan",
-      postedBy: "Anna",
-      postedOn: "2023/05/09",
-    },
-    {
-      tip: "Egg shells are good fertilizer for baby tomato plants.",
-      postedBy: "Supipi",
-      postedOn: "2023/05/02",
-    },
-    {
-      tip: "2 for 1 offer for soil at Blomstalandet and Ica maxi Solna",
-      postedBy: "Ricky",
-      postedOn: "2023/05/01",
-    },
-  ];
+  
+  const { data: posts, isLoading, isError, error, refetch } = useQuery({
+    queryKey: ["posts"],
+    queryFn: fetchPosts,
+  });
+
+  useEffect(() => {
+    refetch();
+  }, [navigate]);
+
+  if (isLoading) {
+    return <div>Loading...</div>;
+  }
+
+  if (isError) {
+    return <div>Error: {error.message}</div>;
+  }
+
+  if (isLoading) {
+    return <div>Loading...</div>;
+  }
+
+  if (isError) {
+    return <div>Error: {error.message}</div>;
+  }
+
+   
 
   return (
     <div className="h-full w-full lg:mt-20 md:mt-20">
@@ -30,9 +48,9 @@ const Tips = () => {
         {posts.map((post, index) => (
           <TipCards
             key={index}
-            tip={post.tip}
-            postedBy={post.postedBy}
-            postedOn={post.postedOn}
+            tip={post.message}
+            postedBy={post.author.username}
+            postedOn={new Date(post.postedOn).toLocaleDateString()}
           />
         ))}
       </div>
