@@ -44,9 +44,9 @@ const App = () => {
 
     <Router>
       <div className="App">
-      <div className="hidden md:block">
+       <div className="hidden md:block">
           <DesktopNav />
-        </div>
+        </div> 
         <Routes>
           <Route path="/tips" element={<Tips />} />
           <Route path="/market" element={<Market />} />
