@@ -3,6 +3,8 @@ import { useNavigate } from 'react-router-dom';
 import { useAuth } from './AuthProvider';
 import logoImageUrl from "../assets/logo.png"
 
+
+
 function LoginForm() {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
@@ -22,40 +24,65 @@ function LoginForm() {
     try {
       await login(username, password);
       localStorage.setItem('auth', JSON.stringify(btoa(`${username}:${password}`)));
-      navigate('/'); 
+      navigate('/');
     } catch (err) {
       setError('Invalid username or password');
     }
   };
 
   return (
-    <div className="h-full w-full px-10 py-10  ">
-    <div className="text-center ">
-       <form onSubmit={handleSubmit}>
-      <h2>Login</h2>
-      {error && <p style={{ color: 'red' }}>{error}</p>}
-      <div>
-        <label htmlFor="username">Username:</label>
-        <input
-          type="text"
-          id="username"
-          value={username}
-          onChange={(e) => setUsername(e.target.value)}
-          required
-        />
+    <div className="h-screen flex items-center justify-center ">
+      <div className="w-full max-w-md bg-white p-8 shadow-lg rounded-lg">
+        <h2 className="text-2xl font-bold text-center mb-6 text-custom-font-primary ">Login</h2>
+        <form onSubmit={handleSubmit} className="space-y-4">
+          {error && <p className="text-red-500 text-center mb-4">{error}</p>}
+          <div>
+            <label htmlFor="username" className="block text-sm font-medium text-custom-font-primary mb-1">
+              Username
+            </label>
+            <input
+              type="text"
+              id="username"
+              value={username}
+              onChange={(e) => setUsername(e.target.value)}
+              className="border border-gray-300 rounded-lg py-2 px-4 w-full"
+              required
+            />
+          </div>
+          <div className=''>
+            <label htmlFor="password" className="block text-sm font-medium text-custom-font-primary  mb-1">
+              Password
+            </label>
+            <input
+              type="password"
+              id="password"
+              value={password}
+              onChange={(e) => setPassword(e.target.value)}
+              className="border border-gray-300 rounded-lg py-2 px-4 w-full"
+              required
+            />
+          </div>
+          <div>
+          <button
+            type="submit"
+            className="w-full py-2 px-4 rounded-lg bg-custom-btn-primary text-white font-bold hover:bg-green-500 focus:outline-none focus:ring-2 focus:ring-custom-btn-primary focus:border-custom-btn-primary"
+          >
+            Login
+          </button>
+          </div>
+         
+        </form>
+        <div className='text-center mt-4'>
+        <h2>Not a member? <span className='text-custom-btn-primary'>Register</span></h2>
+        </div>
+        
       </div>
-      <div>
-        <label htmlFor="password">Password:</label>
-        <input
-          type="password"
-          id="password"
-          value={password}
-          onChange={(e) => setPassword(e.target.value)}
-          required
-        />
-      </div>
-      <button type="submit">Login</button>
-    </form> 
+    </div>
+  );
+}
+
+export default LoginForm;
+
       {/* <div className="">
           <img src={logoImageUrl} alt="" className="h-10"/>
         </div>
@@ -114,9 +141,4 @@ function LoginForm() {
             </div> */}
 
    
-    </div>
-    </div>
-  );
-}
-
-export default LoginForm;
+ 
