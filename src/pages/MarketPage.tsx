@@ -9,6 +9,7 @@ const fetchAllListings = async () => {
 };
 
 const Market = () => {  
+ 
   const { data: listings, isLoading, isError, error } = useQuery({
     queryKey: ["posts"],
     queryFn: fetchAllListings,
@@ -53,6 +54,7 @@ const Market = () => {
             category={listing.category}
             location={listing.location}
             quantity={listing.quantity}
+            listingId={listing.id}
           />
         ))}
         </div>
@@ -65,6 +67,7 @@ const Market = () => {
             category={listing.category}
             location={listing.location}
             quantity={listing.quantity}
+            listingId={listing.id}
           />
         ))}
         </div>
