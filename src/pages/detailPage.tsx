@@ -1,3 +1,4 @@
+import React from 'react';
 import { Icon } from "@iconify/react/dist/iconify.js";
 import { useParams, useNavigate } from "react-router-dom";
 import { useQuery, useMutation, useQueryClient } from "@tanstack/react-query";
@@ -37,12 +38,10 @@ function DetailPage() {
 
   const handleDelete = () => {
     const confirmed = window.confirm('Are you sure you want to delete this thread?');
-  if (confirmed) {
-    deleteMutation.mutate(id);
-  }
+    if (confirmed) {
+      deleteMutation.mutate(id);
+    }
   };
-
-  
 
   if (isLoading) {
     return <div>Loading...</div>;
@@ -56,57 +55,64 @@ function DetailPage() {
   const imageUrl = `http://localhost:8080/api/listings/images/${fileName}`; 
 
   return (
-    <div className="min-h-screen lg:mt-20 md:mt-20 lg:px-12 lg:py-8 px-6 py-4">
-      <div className="flex">
+    <>
+    <div className="lg:mt-20 md:mt-20">
+    <div className="lg:px-12 lg:py-8 px-6 py-4">
+    <div className="w-full max-w-md flex items-center mb-6">
         <button 
           className="mr-6"
           onClick={() => navigate(-1)}
         >
           <Icon icon="weui:back-outlined" />
         </button>
-        <h1 className="text-custom-font-primary font-inika text-lg ">
+        <h1 className="text-custom-font-primary font-inika text-lg">
           My listings
         </h1>
       </div>
-      <div className="bg-white mt-6 p-4 rounded-lg shadow-md text-center">
-        <h2 className="text-xl font-bold">{item.name}</h2>
-        <div className="flex justify-center items-center">
+    <div className="mt-20 flex flex-col items-center justify-center ">
+      
+      <div className="w-full max-w-md bg-white p-8 shadow-lg rounded-lg">
+        <h2 className="text-2xl font-bold text-center mb-6">{item.name}</h2>
+        <div className="flex justify-center items-center mb-4">
           <img
             src={imageUrl}
             alt={item.name}
-            className="w-60 h-full object-cover rounded m-4"
+            className="w-60 h-60 object-cover rounded"
           />
         </div>
-        <div className="ml-4">
-          <p className="text-custom-font-primary font-inika text-lg">
+        <div className="text-center mb-4">
+          <p className="text-custom-font-primary font-inika text-lg mb-2">
             Category: {item.category}
           </p>
-          <p className="text-custom-font-primary font-inika text-lg">
+          <p className="text-custom-font-primary font-inika text-lg mb-2">
             Location: {item.location}
           </p>
-          <p className="text-custom-font-primary font-inika text-lg">
+          <p className="text-custom-font-primary font-inika text-lg mb-4">
             Qty: {item.quantity}
           </p>
-        </div>
-        <div>
-          <button
-            className="bg-custom-btn-primary text-custom-btn-txt py-2 px-10 rounded-lg text-sm mt-4 mb-2 font-inika font-semibold"
-            onClick={() => navigate(`/edit/${id}`)}
-          >
-            Edit
-          </button>
-        </div>
-        <div>
-          <button 
-            className="font-inika text-custom-btn-txt py-2 px-12 rounded-lg mt-2 font-bold text-xl bg-red-500 hover:bg-red-600 focus:outline-none focus:ring-2 focus:ring-red-500 focus:ring-opacity-50"
-            onClick={handleDelete}
-            disabled={deleteMutation.isLoading}
-          >
-            {deleteMutation.isLoading ? "Deleting..." : "Delete"}
-          </button>
+          <div className="" >
+            <button
+              className="bg-custom-btn-primary text-custom-btn-txt py-2 px-10 rounded-lg text-sm font-inika font-semibold "
+              onClick={() => navigate(`/edit/${id}`)}
+            >
+              Edit
+            </button>
+            </div>
+            <div className='pt-4'>
+            <button
+              className="bg-red-500 text-white py-2 px-10 rounded-lg text-sm font-inika font-semibold"
+              onClick={handleDelete}
+              disabled={deleteMutation.isLoading}
+            >
+              {deleteMutation.isLoading ? "Deleting..." : "Delete"}
+            </button>
+          </div>
         </div>
       </div>
     </div>
+    </div>
+    </div>
+    </>
   );
 }
 
