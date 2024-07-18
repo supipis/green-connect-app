@@ -1,23 +1,28 @@
 import { useNavigate } from "react-router-dom";
+import { useQuery } from "@tanstack/react-query";
 import ListingCard from "../componenets/listingCard";
-import axios from "axios";
-import { useEffect, useState } from "react";
+import api from "../auth/api";
 
+const fetchListings = async () => {
+  const response = await api.get("/api/listings");
+  return response.data;
+};
 
 const Home = () => {
   const navigate = useNavigate();
-  const [listings, setListings] = useState([]);
 
-  useEffect(() => {
-    axios.get("http://localhost:8080/api/listings")
-    .then(response => {
-      setListings(response.data)
-    })
-    .catch(error => {
-      console.error("Error fetching data")
-    });
-  },[])
+  const { data: listings, isLoading, isError, error } = useQuery({
+    queryKey: ["listings"],
+    queryFn: fetchListings,
+  });
 
+  if (isLoading) {
+    return <div>Loading...</div>;
+  }
+
+  if (isError) {
+    return <div>Error: {error.message}</div>;
+  }
 
   return (
     <div className="h-full w-full lg:mt-20 md:mt-20">
