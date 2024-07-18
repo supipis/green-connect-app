@@ -14,6 +14,7 @@ const AddForm = () => {
   });
 
   const [file, setFile] = useState(null);
+  const [errorMessage, setErrorMessage] = useState("");
   const { auth } = useAuth();
   const queryClient = useQueryClient();
 
@@ -44,17 +45,20 @@ const AddForm = () => {
   const handleChange = (e) => {
     const { name, value } = e.target;
     setFormData({ ...formData, [name]: value });
+    setErrorMessage(""); // Clear error message on input change
   };
 
   const handleFileChange = (e) => {
     setFile(e.target.files[0]);
+    setErrorMessage(""); // Clear error message on file change
   };
 
   const handleSubmit = (e) => {
     e.preventDefault();
 
-    if (!file) {
-      alert("Please select a file");
+    // Validate form fields
+    if (!formData.name || !formData.location || formData.quantity <= 0 || !file) {
+      setErrorMessage("All fields are required and quantity must be greater than 0.");
       return;
     }
 
@@ -76,23 +80,25 @@ const AddForm = () => {
       quantity: 0,
     });
     setFile(null);
+    setErrorMessage(""); // Clear error message on reset
   };
 
   return (
     <div className="mt-6">
       <div className="">
         <form className="space-y-3" onSubmit={handleSubmit}>
-        <div>
+          <div>
             <label htmlFor="name" className="block text-custom-font-primary font-inika text-lg">
               Name
             </label>
             <input
               type="text"
+              placeholder="eg: Basil"
               id="name"
               name="name"
               value={formData.name}
               onChange={handleChange}
-              className="mt-1 text-custom-font-primary font-inika p-2 block w-full border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-custom-btn-primary focus:border-custom-btn-primary"
+              className="mt-1 text-sm text-custom-font-primary font-inika p-2 block w-full border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-custom-btn-primary focus:border-custom-btn-primary"
             />
           </div>
           <div>
@@ -117,6 +123,7 @@ const AddForm = () => {
             </label>
             <input
               type="text"
+              placeholder="eg: Stockholm"
               id="location"
               name="location"
               value={formData.location}
@@ -156,6 +163,9 @@ const AddForm = () => {
             >
               {addListingMutation.isLoading ? "Adding..." : "Add"}
             </button>
+            {errorMessage && (
+              <p className="text-red-500 mt-2">{errorMessage}</p>
+            )}
           </div>
         </form>
       </div>
