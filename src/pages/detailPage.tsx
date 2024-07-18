@@ -36,8 +36,13 @@ function DetailPage() {
   });
 
   const handleDelete = () => {
+    const confirmed = window.confirm('Are you sure you want to delete this thread?');
+  if (confirmed) {
     deleteMutation.mutate(id);
+  }
   };
+
+  
 
   if (isLoading) {
     return <div>Loading...</div>;
