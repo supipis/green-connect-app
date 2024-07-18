@@ -14,6 +14,8 @@ import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import api from './auth/api';
 import LoginForm from './auth/LoginForm';
 import AuthLayout from './auth/AuthLayout';
+import MessagePage from './pages/MessagePage';
+import { MyMessages } from './pages/MyMessages';
 
 
 const queryClient = new QueryClient({
@@ -54,9 +56,11 @@ const App = () => {
           <Route element={<AuthLayout />}>
           <Route path="/" element={<Home />} />
             <Route path="/add" element={<AddList />} />
+            <Route path='/message/:listingId' element={<MessagePage />} />
             <Route path="/details/:id" element={<DetailPage />} />
             <Route path="/edit/:id" element={<EditListPage />} />
             <Route path="/post" element={<PostTipPage />} />
+            <Route path="/my-messages" element={<MyMessages />} />
           </Route>
         </Routes>
         <div className="block md:hidden">
