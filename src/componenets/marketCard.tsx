@@ -1,12 +1,16 @@
+import { useNavigate } from "react-router-dom";
+
 type Props = {
     image: string;
     name: string;
     category: string;
     location: string;
     quantity: number;
+    listingId: number;
 }
 
-const MarketCards = ({ image, name, category, location, quantity }: Props) => {
+const MarketCards = ({listingId, image, name, category, location, quantity }: Props) => {
+    const navigate = useNavigate();
     const fileName = image;
     const imageUrl = `http://localhost:8080/api/listings/images/${fileName}`;
     return (
@@ -24,7 +28,9 @@ const MarketCards = ({ image, name, category, location, quantity }: Props) => {
                 </div>
             </div>
             <div className="sm:ml-4 lg:flex lg:justify-center md:flex md:justify-center">
-                <button className="bg-custom-btn-primary text-custom-btn-txt py-2 px-2 rounded-lg text-sm font-inika lg:mt-4 md:mt-4">Contact</button>
+                <button className="bg-custom-btn-primary text-custom-btn-txt py-2 px-2 rounded-lg text-sm font-inika lg:mt-4 md:mt-4"
+                onClick={() => navigate(`/message/${listingId}`)}
+                >Contact</button>
             </div>
         </div>
 
