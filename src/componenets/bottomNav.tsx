@@ -29,7 +29,7 @@ const BottomNav = () => {
             }
           >
           <div>
-          <Icon icon="el:livejournal" className="w-6 h-6" />
+          <Icon icon="mingcute:announcement-line" className="w-6 h-6"/>
           <span className="text-sm">Tips</span>
           </div>
            
@@ -43,11 +43,25 @@ const BottomNav = () => {
             }
           >
           <div>
-          <Icon icon="arcticons:volunteer-exchange" className="w-6 h-6 ml-3" />
+          <Icon icon="healthicons:market-stall-outline" className="w-6 h-6 ml-3" />
           <span className="text-sm">Market</span>
           </div>
            
           </NavLink> 
+          <NavLink
+            to="/my-messages"
+            className={({ isActive }) =>
+              isActive
+                ? "flex items-center text-custom-btn-primary"
+                : "flex items-center text-custom-font-primary hover:text-custom-btn-primary"
+            }
+          >
+             <div>
+             <Icon icon="system-uicons:message" className="w-6 h-6 ml-3"/>
+          <span className="text-sm">Messages</span>
+          </div>
+          </NavLink>
+          
         </div>
       </div>
     )
