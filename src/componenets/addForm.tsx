@@ -2,8 +2,10 @@ import { useState } from "react";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { useAuth } from "../auth/AuthProvider";
 import api from "../auth/api";
+import { useNavigate } from "react-router-dom";
 
 const AddForm = () => {
+  const navigate = useNavigate();
   const [formData, setFormData] = useState({
     name: "",
     category: "Plant",
@@ -31,6 +33,7 @@ const AddForm = () => {
       });
       alert("Listing added successfully");
       resetForm();
+      navigate(`/`);
     },
     onError: (error) => {
       console.error("Error:", error);
