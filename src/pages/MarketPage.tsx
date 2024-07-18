@@ -40,9 +40,10 @@ const Market = () => {
           Green market
         </h1>
         <div className="flex justify-end mb-4">
-        <Icon icon="material-symbols-light:search" className="w-8 h-8"/>
-        <p>Search</p>
-
+          <form action="">
+          <Icon icon="material-symbols-light:search" className="w-8 h-8"/>
+          <p>Search</p>
+          </form>
         </div>
         
         <div className="sm:hidden">
