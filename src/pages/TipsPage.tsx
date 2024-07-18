@@ -45,14 +45,22 @@ const Tips = () => {
         <h1 className="text-custom-font-primary font-inika mb-6 text-lg ">
           Let's grow together
         </h1>
-        {data.map((post, index) => (
-          <TipCards
-            key={index}
-            tip={post.message}
-            postedBy={post.author ? (post.author.username ? post.author.username : "x") : "y"}
-            postedOn={new Date(post.postedOn).toLocaleDateString()}
-          />
-        ))}
+        {data.length === 0 ? (
+          <div className="text-center mt-10">
+            <p className="text-lg text-gray-700">
+              No announcements/tips so far. Do you have anything to share?
+            </p>
+          </div>
+        ) : (
+          data.map((post, index) => (
+            <TipCards
+              key={index}
+              tip={post.message}
+              postedBy={post.author ? (post.author.username ? post.author.username : "x") : "y"}
+              postedOn={new Date(post.postedOn).toLocaleDateString()}
+            />
+          ))
+        )}
       </div>
       <div className="text-center">
         <button

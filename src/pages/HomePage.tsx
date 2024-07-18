@@ -31,36 +31,43 @@ const Home = () => {
           My Listings
         </h1>
 
-        {/* Mobile View */}
-        <div className="sm:hidden">
-          {listings.map((listing) => (
-            <ListingCard
-              key={listing.id}
-              id={listing.id}
-              image={listing.image}
-              name={listing.name}
-              category={listing.category}
-              location={listing.location}
-              quantity={listing.quantity}
-            />
-          ))}
-        </div>
+        {listings.length === 0 ? (
+          <div className="text-center mt-10">
+            <h2>No listings at the moment. Start adding to the list</h2>
+          </div>
+        ) : (
+          <>
+            {/* Mobile View */}
+            <div className="sm:hidden">
+              {listings.map((listing) => (
+                <ListingCard
+                  key={listing.id}
+                  id={listing.id}
+                  image={listing.image}
+                  name={listing.name}
+                  category={listing.category}
+                  location={listing.location}
+                  quantity={listing.quantity}
+                />
+              ))}
+            </div>
 
-        {/* Tablet and Desktop View */}
-        <div className="hidden sm:grid sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 lg:text-center">
-          {listings.map((listing) => (
-            <ListingCard
-              key={listing.id}
-              id={listing.id}
-              image={listing.image}
-              name={listing.name}
-              category={listing.category}
-              location={listing.location}
-              quantity={listing.quantity}
-            />
-          ))}
-        </div>
-
+            {/* Tablet and Desktop View */}
+            <div className="hidden sm:grid sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 lg:text-center">
+              {listings.map((listing) => (
+                <ListingCard
+                  key={listing.id}
+                  id={listing.id}
+                  image={listing.image}
+                  name={listing.name}
+                  category={listing.category}
+                  location={listing.location}
+                  quantity={listing.quantity}
+                />
+              ))}
+            </div>
+          </>
+        )}
         <div className="text-center mt-6">
           <button
             className="bg-custom-btn-primary mb-20 font-inika text-custom-btn-txt py-3 px-12 rounded-lg font-bold text-xl"
