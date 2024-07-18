@@ -68,33 +68,43 @@ const Market = () => {
           </form>
         </div>
         
-        <div className="sm:hidden">
-          {filteredListings.map((listing, index) => (
-            <MarketCards
-              key={index}
-              image={listing.image}
-              name={listing.name}
-              category={listing.category}
-              location={listing.location}
-              quantity={listing.quantity}
-              listingId={listing.id}
-            />
-          ))}
-        </div>
+        {filteredListings.length === 0 ? (
+          <div className="text-center mt-10">
+            <p className="text-lg text-gray-700">
+              Nothing in the market yet. Come back later.
+            </p>
+          </div>
+        ) : (
+          <>
+            <div className="sm:hidden">
+              {filteredListings.map((listing, index) => (
+                <MarketCards
+                  key={index}
+                  image={listing.image}
+                  name={listing.name}
+                  category={listing.category}
+                  location={listing.location}
+                  quantity={listing.quantity}
+                  listingId={listing.id}
+                />
+              ))}
+            </div>
 
-        <div className="hidden sm:grid sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 lg:text-center">
-          {filteredListings.map((listing, index) => (
-            <MarketCards
-              key={index}
-              image={listing.image}
-              name={listing.name}
-              category={listing.category}
-              location={listing.location}
-              quantity={listing.quantity}
-              listingId={listing.id}
-            />
-          ))}
-        </div>
+            <div className="hidden sm:grid sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 lg:text-center">
+              {filteredListings.map((listing, index) => (
+                <MarketCards
+                  key={index}
+                  image={listing.image}
+                  name={listing.name}
+                  category={listing.category}
+                  location={listing.location}
+                  quantity={listing.quantity}
+                  listingId={listing.id}
+                />
+              ))}
+            </div>
+          </>
+        )}
       </div>
     </div>
   );

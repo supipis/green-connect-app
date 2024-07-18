@@ -122,35 +122,40 @@ const fetchMyThreads = async () => {
         <div className="lg:px-12 lg:py-8 px-6 py-4">
           <h1 className="text-custom-font-primary mb-6 text-lg">My Messages</h1>
   
-          {data &&
-            data.map((thread) => (
-              <div key={thread.threadId} className="bg-white p-4 shadow-lg rounded-lg mb-4">
-                <div className="flex justify-between">
-                  <div>
-                    <h1 className="text-xl font-bold mb-2">Thread {thread.threadId}</h1>
-                    {thread.messages.map((message, index) => (
-                      <div key={index}>
-                        <p className="text-gray-700">{message.content}</p>
-                        <p className="text-sm text-gray-500">
-                          Sent on: <span className="font-semibold">{new Date(message.sentOn).toLocaleString()}</span>
-                        </p>
-                        <p className="text-sm text-gray-500">
-                          Sent by: <span className="font-semibold">{message.senderUsername}</span>
-                        </p>
-                      </div>
-                    ))}
+          {data && data.length > 0 ? (
+        data.map((thread) => (
+          <div key={thread.threadId} className="bg-white p-4 shadow-lg rounded-lg mb-4">
+            <div className="flex justify-between">
+              <div>
+                <h1 className="text-xl font-bold mb-2">Thread {thread.threadId}</h1>
+                {thread.messages.map((message, index) => (
+                  <div key={index}>
+                    <p className="text-gray-700">{message.content}</p>
+                    <p className="text-sm text-gray-500">
+                      Sent on: <span className="font-semibold">{new Date(message.sentOn).toLocaleString()}</span>
+                    </p>
+                    <p className="text-sm text-gray-500">
+                      Sent by: <span className="font-semibold">{message.senderUsername}</span>
+                    </p>
                   </div>
-                  <div>
-                    <button
-                      onClick={() => handleDelete(thread.threadId)}
-                      className="font-inika text-custom-btn-txt py-2 px-6 rounded-lg mt-2 font-bold text-xl bg-red-500 hover:bg-red-600 focus:outline-none focus:ring-2 focus:ring-red-500 focus:ring-opacity-50"
-                    >
-                      Delete
-                    </button>
-                  </div>
-                </div>
+                ))}
               </div>
-            ))}
+              <div>
+                <button
+                  onClick={() => handleDelete(thread.threadId)}
+                  className="font-inika text-custom-btn-txt py-2 px-6 rounded-lg mt-2 font-bold text-xl bg-red-500 hover:bg-red-600 focus:outline-none focus:ring-2 focus:ring-red-500 focus:ring-opacity-50"
+                >
+                  Delete
+                </button>
+              </div>
+            </div>
+          </div>
+        ))
+      ) : (
+        <div className="text-center mt-10">
+          <p className="text-lg text-gray-700">You don't have any messages</p>
+        </div>
+      )}
         </div>
       </div>
     );
