@@ -1,33 +1,63 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
+import { useQuery, useMutation, useQueryClient } from "@tanstack/react-query";
+import api from "../auth/api";
+
+const fetchListing = async (id) => {
+  const response = await api.get(`/api/listings/${id}`);
+  return response.data;
+};
+
+const updateListing = async ({ id, formData }) => {
+  const response = await api.put(`/api/listings/${id}`, formData);
+  return response.data;
+};
 
 const EditList = () => {
   const navigate = useNavigate();
   const { id } = useParams();
+  const queryClient = useQueryClient();
+
+  const [file, setFile] = useState(null);
   const [formData, setFormData] = useState({
-    name: '',
-    category: 'Plant',
-    location: '',
+    name: "",
+    category: "Plant",
+    location: "",
     quantity: 0,
-    image: '',
-    imageUrl: ''
+    image: "",
+    imageUrl: "",
   });
 
-  useEffect(() => {
-    fetch(`http://localhost:8080/api/listings/${id}`)
-      .then((response) => response.json())
-      .then((data) => {
-        setFormData({
-          name: data.name,
-          category: data.category,
-          location: data.location,
-          quantity: data.quantity,
-          image: data.image,
-          imageUrl: `http://localhost:8080/${data.image}`,
-        });
-      })
-      .catch((error) => console.error("Error fetching item:", error));
-  }, [id]);
+  const { isLoading, isError, error } = useQuery({
+    queryKey: ["listing", id],
+    queryFn: () => fetchListing(id),
+    onSuccess: (data) => {
+      setFormData({
+        name: data.name,
+        category: data.category,
+        location: data.location,
+        quantity: data.quantity,
+        image: data.image,
+        imageUrl: `http://localhost:8080/api/listings/images/${data.image}`,
+      });
+    },
+  });
+
+  const updateMutation = useMutation({
+    mutationFn: updateListing,
+    onSuccess: () => {
+      queryClient.invalidateQueries(["listing", id]);
+      queryClient.invalidateQueries(["listings"]);
+      navigate(`/details/${id}`);
+    },
+    onError: (error) => {
+      console.error("Error occurred while updating listing:", error);
+    },
+  });
+
+  const handleFileChange = (e) => {
+    setFile(e.target.files[0]);
+  };
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -37,56 +67,41 @@ const EditList = () => {
     }));
   };
 
-  const handleFileChange = (e) => {
-    const file = e.target.files[0];
-    setFormData((prevData) => ({
-      ...prevData,
-      image: file,
-    }));
-  };
-
   const handleSubmit = async (e) => {
     e.preventDefault();
-    try {
-      const formDataToUpdate = new FormData();
-      formDataToUpdate.append('name', formData.name);
-      formDataToUpdate.append('category', formData.category);
-      formDataToUpdate.append('location', formData.location);
-      formDataToUpdate.append('quantity', formData.quantity);
-      formDataToUpdate.append('image', formData.image);
+    const formDataToUpdate = new FormData();
+    formDataToUpdate.append("name", formData.name);
+    formDataToUpdate.append("category", formData.category);
+    formDataToUpdate.append("location", formData.location);
+    formDataToUpdate.append("quantity", String(formData.quantity));
 
-      const response = await fetch(`http://localhost:8080/api/listings/${id}`, {
-        method: 'PUT',
-        body: formDataToUpdate,
-      });
-
-      if (response.ok) {
-        navigate(`/details/${id}`);
-      } else {
-        console.error('Failed to update listing');
-      }
-    } catch (error) {
-      console.error('Error occurred while updating listing:', error);
+    if (file) {
+      formDataToUpdate.append("image", file);
     }
-  };
-  const getCurrentImageUrl = () => {
-    if (!formData?.image) return ''; // Handle case where image URL is empty
 
-    const fileName = formData.image.split('/').pop();
-    const imageUrl = `http://localhost:8080/${fileName}`;
-    return imageUrl;
+    updateMutation.mutate({ id, formData: formDataToUpdate });
   };
-  // const getCurrentImageUrl = () => {
-  //   if (!formData.image) return '';
-  //   return URL.createObjectURL(formData.image);
-  // };
+
+  const getCurrentImageUrl = () => {
+    if (!formData?.image) return "";
+    const fileName = formData.image;
+    return `http://localhost:8080/api/listings/images/${fileName}`;
+  };
+
+  if (isLoading) return <div>Loading...</div>;
+  if (isError) return <div>Error: {error.message}</div>;
 
   return (
     <div className="mt-6">
       <div className="">
         <form className="space-y-3" onSubmit={handleSubmit}>
-          <div>
-            <label htmlFor="name" className="block text-custom-font-primary font-inika text-lg">Name</label>
+        <div>
+            <label
+              htmlFor="name"
+              className="block text-custom-font-primary font-inika text-lg"
+            >
+              Name
+            </label>
             <input
               type="text"
               id="name"
@@ -97,7 +112,12 @@ const EditList = () => {
             />
           </div>
           <div>
-            <label htmlFor="category" className="block text-custom-font-primary font-inika text-lg">Category</label>
+            <label
+              htmlFor="category"
+              className="block text-custom-font-primary font-inika text-lg"
+            >
+              Category
+            </label>
             <select
               id="category"
               name="category"
@@ -111,7 +131,12 @@ const EditList = () => {
             </select>
           </div>
           <div>
-            <label htmlFor="location" className="block text-custom-font-primary font-inika text-lg">Location</label>
+            <label
+              htmlFor="location"
+              className="block text-custom-font-primary font-inika text-lg"
+            >
+              Location
+            </label>
             <input
               type="text"
               id="location"
@@ -122,7 +147,12 @@ const EditList = () => {
             />
           </div>
           <div>
-            <label htmlFor="quantity" className="block text-custom-font-primary font-inika text-lg">Quantity</label>
+            <label
+              htmlFor="quantity"
+              className="block text-custom-font-primary font-inika text-lg"
+            >
+              Quantity
+            </label>
             <input
               id="quantity"
               name="quantity"
@@ -132,7 +162,12 @@ const EditList = () => {
             />
           </div>
           <div>
-            <label htmlFor="picture" className="block text-custom-font-primary font-inika text-lg">Picture</label>
+            <label
+              htmlFor="picture"
+              className="block text-custom-font-primary font-inika text-lg"
+            >
+              Picture
+            </label>
             <input
               type="file"
               id="picture"
@@ -148,33 +183,38 @@ const EditList = () => {
                 <img
                   src={getCurrentImageUrl()}
                   alt="Current"
-                  className="mt-2 w-40 h-auto object-cover rounded-md"
+                  className="mt-2 w-40 h-auto object-cover  rounded-md"
                 />
               </div>
             )}
           </div> */}
           <div className="mt-4">
-  {formData.imageUrl && (
-    <div>
-      <label className="block text-custom-font-primary font-inika text-lg">Current Picture:</label>
-      <img
-        src={getCurrentImageUrl()}
-        alt="Current"
-        className="mt-2 w-40 h-auto object-cover rounded-md"
-      />
-    </div>
-  )}
-</div>
-
+            {formData.imageUrl && (
+              <div>
+                <label className="block text-custom-font-primary font-inika text-lg">
+                  Current Picture:
+                </label>
+                <img
+                  src={getCurrentImageUrl()}
+                  alt="Current"
+                  className="mt-2 w-40 h-auto object-cover rounded-md"
+                />
+              </div>
+            )}
+          </div>
           <div className="text-center">
-            <button type="submit" className="bg-custom-btn-primary text-custom-btn-txt py-3 px-12 rounded-lg mt-2 font-bold text-xl mb-20">
-              Edit
+            <button
+              type="submit"
+              className="bg-custom-btn-primary text-custom-btn-txt py-3 px-12 rounded-lg mt-2 font-bold text-xl mb-20"
+              disabled={updateMutation.isLoading}
+            >
+              {updateMutation.isLoading ? "Updating..." : "Update Listing"}
             </button>
           </div>
         </form>
       </div>
     </div>
   );
-}
+};
 
 export default EditList;
