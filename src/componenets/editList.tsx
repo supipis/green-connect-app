@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import { useQuery, useMutation, useQueryClient } from "@tanstack/react-query";
 import api from "../auth/api";
@@ -28,12 +28,12 @@ const EditList = () => {
     imageUrl: "",
   });
 
-  const { isLoading, isError, error } = useQuery({
+  const { data, isLoading, isError, error } = useQuery({
     queryKey: ["listing", id],
-    queryFn: () => fetchListing(id),
-    onSuccess: (data) => {
-      console.log('Fetched data:', data);
+    queryFn: () => fetchListing(id)
+  });
 
+  useEffect(function() {
       // When the data is successfully fetched, populate the form fields
       setFormData({
         name: data.name,
@@ -43,8 +43,7 @@ const EditList = () => {
         image: data.image,
         imageUrl: `http://localhost:8080/api/listings/images/${data.image}`,
       });
-    },
-  });
+  }, data);
 
   const updateMutation = useMutation({
     mutationFn: updateListing,
