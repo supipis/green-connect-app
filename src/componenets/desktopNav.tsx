@@ -46,6 +46,17 @@ const DesktopNav = () => {
           >
             Market
           </NavLink>
+
+          <NavLink
+            to="/my-messages"
+            className={({ isActive }) =>
+              isActive
+                ? "flex items-center text-custom-btn-primary"
+                : "flex items-center text-custom-font-primary hover:text-custom-btn-primary"
+            }
+          >
+            My Messages
+          </NavLink>
           
          
         </div>
