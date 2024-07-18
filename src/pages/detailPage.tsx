@@ -51,7 +51,7 @@ function DetailPage() {
   const imageUrl = `http://localhost:8080/api/listings/images/${fileName}`; 
 
   return (
-    <div className="min-h-screen px-6 py-4">
+    <div className="min-h-screen lg:mt-20 md:mt-20 lg:px-12 lg:py-8 px-6 py-4">
       <div className="flex">
         <button 
           className="mr-6"
