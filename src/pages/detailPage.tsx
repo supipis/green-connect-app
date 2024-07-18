@@ -74,7 +74,7 @@ function DetailPage() {
           <img
             src={imageUrl}
             alt={item.name}
-            className="w-40 h-full object-cover rounded m-4"
+            className="w-60 h-full object-cover rounded m-4"
           />
         </div>
         <div className="ml-4">
