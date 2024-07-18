@@ -16,6 +16,8 @@ import LoginForm from './auth/LoginForm';
 import AuthLayout from './auth/AuthLayout';
 import MessagePage from './pages/MessagePage';
 import { MyMessages } from './pages/MyMessages';
+import LogoutPage from './pages/LogoutPage';
+
 
 
 const queryClient = new QueryClient({
@@ -53,6 +55,7 @@ const App = () => {
           <Route path="/tips" element={<Tips />} />
           <Route path="/market" element={<Market />} />
           <Route path="/login" element={<LoginForm />} />
+         
           <Route element={<AuthLayout />}>
           <Route path="/" element={<Home />} />
             <Route path="/add" element={<AddList />} />
@@ -60,6 +63,7 @@ const App = () => {
             <Route path="/details/:id" element={<DetailPage />} />
             <Route path="/edit/:id" element={<EditListPage />} />
             <Route path="/post" element={<PostTipPage />} />
+            <Route path='/logout' element={<LogoutPage />} />
             <Route path="/my-messages" element={<MyMessages />} />
           </Route>
         </Routes>
