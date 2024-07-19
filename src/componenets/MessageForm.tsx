@@ -21,8 +21,7 @@ export const MessageForm = ({listingId}) => {
             content: message,
           }
 
-          debugger;
-
+       
         const response = await api.post('/api/message-threads', requestData);
   
         console.log('Message sent successfully:', response.data);

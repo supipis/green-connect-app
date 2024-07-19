@@ -3,6 +3,7 @@ import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { useAuth } from "../auth/AuthProvider";
 import api from "../auth/api";
 import { useNavigate } from "react-router-dom";
+import toast, { Toaster } from 'react-hot-toast';
 
 const AddForm = () => {
   const navigate = useNavigate();
@@ -32,31 +33,31 @@ const AddForm = () => {
       queryClient.invalidateQueries({
         queryKey: ["listings"]
       });
-      alert("Listing added successfully");
+      toast.success('New listing added');
       resetForm();
       navigate(`/`);
     },
     onError: (error) => {
       console.error("Error:", error);
-      alert("Failed to add listing");
+      toast.error("Failed to add listing");
     },
   });
 
   const handleChange = (e) => {
     const { name, value } = e.target;
     setFormData({ ...formData, [name]: value });
-    setErrorMessage(""); // Clear error message on input change
+    setErrorMessage(""); 
   };
 
   const handleFileChange = (e) => {
     setFile(e.target.files[0]);
-    setErrorMessage(""); // Clear error message on file change
+    setErrorMessage(""); 
   };
 
   const handleSubmit = (e) => {
     e.preventDefault();
 
-    // Validate form fields
+  
     if (!formData.name || !formData.location || formData.quantity <= 0 || !file) {
       setErrorMessage("All fields are required and quantity must be greater than 0.");
       return;
@@ -80,11 +81,12 @@ const AddForm = () => {
       quantity: 0,
     });
     setFile(null);
-    setErrorMessage(""); // Clear error message on reset
+    setErrorMessage(""); 
   };
 
   return (
     <div className="mt-6">
+      <Toaster />
       <div className="">
         <form className="space-y-3" onSubmit={handleSubmit}>
           <div>
