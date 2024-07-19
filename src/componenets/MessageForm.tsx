@@ -44,6 +44,7 @@ export const MessageForm = ({listingId}) => {
             <textarea
               id="message"
               name="message"
+              placeholder="Write your message here"
               value={message}
               onChange={(e) => setMessage(e.target.value)}
               className="mt-1 text-custom-font-primary font-inika p-2 block w-full border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-custom-btn-primary focus:border-custom-btn-primary h-60 resize-none" // Set appropriate height for tip content

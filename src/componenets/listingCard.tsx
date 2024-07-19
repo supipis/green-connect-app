@@ -21,7 +21,7 @@ const ListingCard = ({ id, image, name, category, location, quantity }: Props) =
     return (
         <div className="bg-white shadow-md rounded-lg p-4 cursor-pointer flex items-center lg:flex-col lg:items-center mb-4"
              onClick={handleCardClick}>
-            <img src={imageUrl} alt={name} className="w-16 h-16 lg:w-32 lg:h-32 rounded mb-4 lg:mb-0 lg:mt-4" />
+            <img src={imageUrl} alt={name} className="w-16 h-16 lg:w-40 lg:h-40 rounded mb-4 lg:mb-0 lg:mt-4" />
             <div className="ml-4 lg:ml-0">
                 <h1 className="text-lg text-custom-font-primary font-inika font-bold mb-2">{name}</h1>
                 <div className="text-sm">

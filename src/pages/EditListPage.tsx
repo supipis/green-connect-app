@@ -18,7 +18,7 @@ const EditListPage = () => {
               <Icon icon="weui:back-outlined" />
             </button>
             <h1 className="text-custom-font-primary font-inika text-lg">
-              My listings
+              Edit your listings
             </h1>
           </div>
           <div className="flex flex-col items-center justify-center ">

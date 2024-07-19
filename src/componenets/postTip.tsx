@@ -53,6 +53,7 @@ const PostTip = () => {
             </label>
             <textarea
               id="tip"
+              placeholder="Write your tip here"
               name="tip"
               value={tip}
               onChange={(e) => setTip(e.target.value)}

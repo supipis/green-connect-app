@@ -28,7 +28,7 @@ const MarketCards = ({listingId, image, name, category, location, quantity }: Pr
                 </div>
             </div>
             <div className="sm:ml-4 lg:flex lg:justify-center md:flex md:justify-center">
-                <button className="bg-custom-btn-primary text-custom-btn-txt py-2 px-2 rounded-lg text-sm font-inika lg:mt-4 md:mt-4"
+                <button className="bg-custom-btn-primary text-custom-btn-txt py-2 px-3 font-semibold rounded-lg text-sm font-inika lg:mt-4 md:mt-4"
                 onClick={() => navigate(`/message/${listingId}`)}
                 >Contact</button>
             </div>
