@@ -1,10 +1,8 @@
 import { Icon } from "@iconify/react/dist/iconify.js";
 import api from "../auth/api";
-
 import { useQuery } from "@tanstack/react-query";
 import { useState } from "react";
 import MarketCards from "../componenets/marketCard";
-
 
 const fetchAllListings = async () => {
   const response = await api.get("/api/listings/all");
@@ -12,9 +10,9 @@ const fetchAllListings = async () => {
 };
 
 const Market = () => {
-  const [searchQuery, setSearchQuery] = useState('');
+  const [searchQuery, setSearchQuery] = useState("");
   const { data: listings = [], isLoading, isError, error } = useQuery({
-    queryKey: ["listings"], 
+    queryKey: ["listings"], // Updated query key for clarity
     queryFn: fetchAllListings,
   });
 
@@ -26,9 +24,8 @@ const Market = () => {
     return <div>Error: {error.message}</div>;
   }
 
-  
   const filteredListings = listings.filter((listing) => {
-    if (!listing) return false; 
+    if (!listing) return false; // Guard against undefined listings
     const query = searchQuery.toLowerCase();
     return (
       (listing.name && listing.name.toLowerCase().includes(query)) ||
@@ -38,7 +35,6 @@ const Market = () => {
     );
   });
 
-  
   const handleSearchChange = (e) => {
     setSearchQuery(e.target.value);
   };
@@ -66,7 +62,7 @@ const Market = () => {
             </div>
           </form>
         </div>
-        
+
         {filteredListings.length === 0 ? (
           <div className="text-center mt-10">
             <p className="text-lg text-gray-700">
@@ -76,9 +72,9 @@ const Market = () => {
         ) : (
           <>
             <div className="sm:hidden ">
-              {filteredListings.map((listing, index) => (
+              {filteredListings.map((listing) => (
                 <MarketCards
-                  key={index}
+                  key={listing.id}
                   image={listing.image}
                   name={listing.name}
                   category={listing.category}
@@ -90,9 +86,9 @@ const Market = () => {
             </div>
 
             <div className="hidden sm:grid sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 lg:text-center">
-              {filteredListings.map((listing, index) => (
+              {filteredListings.map((listing) => (
                 <MarketCards
-                  key={index}
+                  key={listing.id}
                   image={listing.image}
                   name={listing.name}
                   category={listing.category}
