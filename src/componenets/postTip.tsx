@@ -34,7 +34,7 @@ const PostTip = () => {
     try {
       await createTipMutation.mutate({ message: tip });
       console.log("Tip posted successfully!");
-      setTip(""); // Clear input after successful post
+      setTip(""); 
       alert("Tip posted!");
       navigate("/tips")
     } catch (error) {

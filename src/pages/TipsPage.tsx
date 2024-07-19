@@ -42,9 +42,10 @@ const Tips = () => {
   return (
     <div className="h-full w-full lg:mt-20 md:mt-20">
       <div className="px-6 py-4 lg:px-12 lg:py-8">
-        <h1 className="text-custom-font-primary font-inika mb-6 text-lg ">
+        <h1 className="text-custom-font-primary font-inika mb-6 text-xl ">
           Let's grow together
         </h1>
+       
         {data.length === 0 ? (
           <div className="text-center mt-10">
             <p className="text-lg text-gray-700">
@@ -64,7 +65,7 @@ const Tips = () => {
       </div>
       <div className="text-center">
         <button
-          className="bg-custom-btn-primary font-inika text-custom-btn-txt py-3 px-12 rounded-lg mt-2 font-bold text-xl"
+          className="bg-custom-btn-primary font-inika text-custom-btn-txt py-3 px-12 rounded-lg mt-2 font-bold text-xl mb-20"
           onClick={() => navigate("/post")}
         >
           Post

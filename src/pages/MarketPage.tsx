@@ -47,7 +47,7 @@ const Market = () => {
   return (
     <div className="h-full w-full lg:mt-20 md:mt-20">
       <div className="px-6 py-4 lg:px-12 lg:py-8">
-        <h1 className="text-custom-font-primary font-inika mb-6 text-2xl">
+        <h1 className="text-custom-font-primary font-inika mb-6 text-xl">
           Green Market
         </h1>
         <div className="flex justify-end mb-4">
@@ -76,7 +76,7 @@ const Market = () => {
           </div>
         ) : (
           <>
-            <div className="sm:hidden">
+            <div className="sm:hidden ">
               {filteredListings.map((listing, index) => (
                 <MarketCards
                   key={index}

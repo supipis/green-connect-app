@@ -60,7 +60,7 @@ export function MyMessages() {
   return (
     <div className="h-full w-full lg:mt-20 md:mt-20">
       <div className="lg:px-12 lg:py-8 px-6 py-4">
-        <h1 className="text-custom-font-primary mb-6 text-lg">My Messages</h1>
+        <h1 className="text-custom-font-primary mb-6 text-xl">My Messages</h1>
 
         {data && data.length > 0 ? (
           data.map((thread) => (

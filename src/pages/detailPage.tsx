@@ -88,9 +88,9 @@ function DetailPage() {
               My listings
             </h1>
           </div>
-          <div className="mt-20 flex flex-col items-center justify-center ">
+          <div className="flex flex-col items-center justify-center ">
             <div className="w-full max-w-md bg-white p-8 shadow-lg rounded-lg">
-              <h2 className="text-2xl font-bold text-center mb-6">{item.name}</h2>
+              <h2 className="text-xl font-bold text-center mb-6">{item.name}</h2>
               <div className="flex justify-center items-center mb-4">
                 <img
                   src={imageUrl}

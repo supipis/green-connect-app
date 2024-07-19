@@ -94,7 +94,7 @@ const EditList = () => {
   if (isError) return <div>Error: {error.message}</div>;
 
   return (
-    <div className="mt-6">
+    <div className="mt-6 mb-20">
       <div className="">
         <form className="space-y-3" onSubmit={handleSubmit}>
          
@@ -208,7 +208,7 @@ const EditList = () => {
           <div className="text-center">
             <button
               type="submit"
-              className="bg-custom-btn-primary text-custom-btn-txt py-3 px-12 rounded-lg mt-2 font-bold text-xl mb-20"
+              className="bg-custom-btn-primary text-custom-btn-txt py-3 px-12 rounded-lg mt-2 font-bold text-xl "
               disabled={updateMutation.isLoading}
             >
               {updateMutation.isLoading ? "Updating..." : "Update Listing"}
