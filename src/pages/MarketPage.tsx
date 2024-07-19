@@ -5,7 +5,7 @@ import { useQuery } from "@tanstack/react-query";
 import { useState } from "react";
 import MarketCards from "../componenets/marketCard";
 
-// Fetch listings from the API
+
 const fetchAllListings = async () => {
   const response = await api.get("/api/listings/all");
   return response.data;
@@ -14,11 +14,10 @@ const fetchAllListings = async () => {
 const Market = () => {
   const [searchQuery, setSearchQuery] = useState('');
   const { data: listings = [], isLoading, isError, error } = useQuery({
-    queryKey: ["listings"], // Updated query key for clarity
+    queryKey: ["listings"], 
     queryFn: fetchAllListings,
   });
 
-  // Handle loading and error states
   if (isLoading) {
     return <div>Loading...</div>;
   }
@@ -27,9 +26,9 @@ const Market = () => {
     return <div>Error: {error.message}</div>;
   }
 
-  // Filter listings based on search query
+  
   const filteredListings = listings.filter((listing) => {
-    if (!listing) return false; // Guard against undefined listings
+    if (!listing) return false; 
     const query = searchQuery.toLowerCase();
     return (
       (listing.name && listing.name.toLowerCase().includes(query)) ||
@@ -39,7 +38,7 @@ const Market = () => {
     );
   });
 
-  // Handle search input change
+  
   const handleSearchChange = (e) => {
     setSearchQuery(e.target.value);
   };
